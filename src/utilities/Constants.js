@@ -1,0 +1,9 @@
+export const SIGN_IN_SCREEN = "signInScreen";
+export const SET_SEARCH_TERM = "setSearchTerm";
+export const SET_IS_LOADING = "setIsLoading";
+export const TOGGLE_FAVORITE = "toggleFavorite";
+export const LOAD_FAVORITES = "loadFavorites";
+export const SHIFT_LEFT = "shiftLeft";
+export const SHIFT_RIGHT = "shiftRight";
+export const SET_FAVORITE_INDEX = "setFavoriteIndex";
+export const SET_BACKGROUND = "setBackground";
