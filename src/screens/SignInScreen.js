@@ -11,7 +11,7 @@ export default function SignInScreen() {
     let password;
 
     return (
-        <View style={styles.signInContainer}>
+        <View style={styles.container}>
             <Text style={styles.logoText}>ChatApp</Text>
             <Text style={styles.loginHeader}>Log in</Text>
             <Text style={styles.instructionText}>Enter your email and password to continue</Text>
@@ -33,7 +33,7 @@ export default function SignInScreen() {
 }
 
 const styles = StyleSheet.create({
-    signInContainer: {
+    container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
         alignItems: 'center'

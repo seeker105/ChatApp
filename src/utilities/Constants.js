@@ -1,5 +1,6 @@
 export const SIGN_IN_SCREEN = "signInScreen";
-export const SET_SEARCH_TERM = "setSearchTerm";
+export const ACCOUNT_DETAILS_SCREEN = "accountDetailsScreen";
+export const SET_SCREEN = "setScreen";
 export const SET_IS_LOADING = "setIsLoading";
 export const TOGGLE_FAVORITE = "toggleFavorite";
 export const LOAD_FAVORITES = "loadFavorites";
