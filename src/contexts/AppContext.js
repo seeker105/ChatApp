@@ -1,47 +1,16 @@
-import React, { useReducer } from "react";
-import SignInScreen from "../screens/SignInScreen";
-import AccountDetailsScreen from "../screens/AccountDetailsScreen";
+import React, { useEffect, useReducer } from "react";
 import { ACCOUNT_DETAILS_SCREEN, SIGN_IN_SCREEN, SET_ERROR_MESSAGE, SET_SCREEN, SET_IS_LOADING } from "../utilities/Constants";
+import { getSubjects } from "../database/Supabase";
+import reducer from "../utilities/Reducer";
 
 export const AppContext = React.createContext();
 
-function reducer(state, action) {
-    state = {
-        ...state,
-        errorMessage: ""
-    };
-    switch (action.type) {
-        case SET_SCREEN: {
-            let screen = {
-                [SIGN_IN_SCREEN]: <SignInScreen />,
-                [ACCOUNT_DETAILS_SCREEN]: <AccountDetailsScreen />
-            }[action.payload] || <SignInScreen />
-            return {
-                ...state,
-                screen: screen
-            };
-        }
-        case SET_IS_LOADING: {
-            return {
-                ...state,
-                isLoading: action.payload,
-            }
-        }
-        case SET_ERROR_MESSAGE: {
-            return {
-                ...state,
-                errorMessage: action.payload,
-            };
-        }
-        default: return state;
-    };
-}
-
 export const AppProvider = ( {children} ) => {
     const [appState, dispatch] = useReducer(reducer, {
-        screen: <AccountDetailsScreen />,
+        screen: ACCOUNT_DETAILS_SCREEN,
         email: "",
-        password: ""
+        password: "",
+        isLoading: false
     });
 
     const setLoading = (value) => {
@@ -56,6 +25,23 @@ export const AppProvider = ( {children} ) => {
         dispatch: dispatch,
         setLoading: setLoading
     };
+
+    useEffect(() => {
+        async function loadFunc() {
+            try {
+                setLoading(true);
+                let subjects = await getSubjects();
+                console.log("subjects", subjects);
+            }
+            catch (error) {
+                console.log(error);
+            }
+            finally {
+                setLoading(false);
+            }
+        }
+        loadFunc();
+    }, []);
 
     return (
         <AppContext.Provider value={contextObject}>
